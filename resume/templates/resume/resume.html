@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .user-info p {
+            text-align: center;
+            margin: 5px 0;
+        }
+        .experience-section {
+            margin-bottom: 30px;
+        }
+        .experience-header {
+            font-weight: bold;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .experience-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .experience-description {
+            flex: 1;
+            text-align: center;
+            margin: 0 20px;  /* Add margins to either side */
+        }
+        .experience-dates {
+            text-align: right;
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ user_info.name }}</h1>
+        <div class="user-info">
+            <p>Email: {{ user_info.email }}</p>
+            <p>Phone: {{ user_info.phone }}</p>
+            <p>LinkedIn: <a href="{{ user_info.linkedin_url }}">{{ user_info.linkedin_url }}</a></p>
+        </div>
+
+        <h2>Experience</h2>
+
+        {% for experience in experiences %}
+            <div class="experience-section">
+                <div class="experience-header">{{ experience.get_type_display }}</div>
+                <div class="experience-item">
+                    <div class="experience-description">
+                        <p>{{ experience.description }}</p>
+                    </div>
+                    {% if experience.type != 'skill' %}
+                        <div class="experience-dates">
+                            <p>{{ experience.start_date }} - {{ experience.end_date }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+  
+
